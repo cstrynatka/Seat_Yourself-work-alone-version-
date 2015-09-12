@@ -1,0 +1,6 @@
+<h1>Welcome back, <%= @user.first_name %>!</h1>
+<h2>Your account info is as following:</h2>
+<p>User name: <%= @user.first_name%> <%= @user.last_name%></p>
+<p>Email: <%= @user.email%></p>
+
+<%= link_to "Book a Reservation", new_reservation_path %> | <%= link_to "Edit Account", edit_user_path(@user) %> | <%= link_to 'Delete Account', user_path(@user), method: :delete, data: {confirm: "Are you sure you want to delete your account?"} %>
