@@ -1,0 +1,4 @@
+<h1>Restaurant <%= @restaurant.id %>: <%= @restaurant.name %></h1>
+<p><%= @restaurant.name %></p>
+<p><%= @restaurant.capacity %></p>
+<%= link_to 'Book a reservation in this restaurant', new_reservation_path %> | <%= link_to 'Modify a reservation in this restaurant', edit_reservation_path %> | <%= link_to 'Back to restaurants', restaurants_path %>

@@ -1,0 +1,10 @@
+<h1>All restaurants</h1>
+
+<% @restaurants.each do |restaurant| %>
+  <ul>
+    <li>Name: <%= restaurant.name %></li>
+    <li>Capacity: <%= restaurant.capacity %></li>
+  </ul>
+  <%= link_to 'Book a reservation', new_reservation_path %> | <%= link_to 'Restaurant page', restaurant_path(restaurant.id) %>
+  <br>
+<% end %>
