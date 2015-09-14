@@ -1,0 +1,5 @@
+<h1>Reservation ID: <%= @reservation.id %></h1>
+<p>Reservation for restaurant: <%= @reservation.restaurant.name %></p>
+<p><%= @reservation.dinner_time %></p>
+<p><%= @reservation.party_size %></p>
+<%= link_to 'Edit reservation', edit_reservation_path %>

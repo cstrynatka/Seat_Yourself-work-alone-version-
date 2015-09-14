@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password  # Add in hidden validation 'presence: ture' for 'password' and 'password_confirmation'
   validates :first_name, :last_name, :email, presence: true
   validates :email, confirmation: true
-  # validates :email, uniqueness: true
+  validates :email, uniqueness: true
   validates :email, format: { with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i,
     message: "not a valid email address" }  # this message can be accessed in '@user.errors.message'
   validates :email_confirmation, presence: true

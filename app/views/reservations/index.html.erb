@@ -1,0 +1,8 @@
+<h1>All reservations you have booked: </h1>
+<% @reservations.each do |reservation| %>
+  <ul>
+    <li>From restaurant: <%= reservation.restaurant.name %></li>
+    <li>Date & Time: <%= reservation.dinner_time %></li>
+    <li>Party size: <%= reservation.party_size %></li>
+  </ul>
+<% end %>
