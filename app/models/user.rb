@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
     # message: "only allows letters" }
   has_many :restaurants, through: :reservations
   has_many :owned_restaurants, class_name: "Restaurant"
+  has_many :reservations
 end
 
 

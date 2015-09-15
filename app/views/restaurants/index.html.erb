@@ -5,6 +5,6 @@
     <li>Name: <%= restaurant.name %></li>
     <li>Capacity: <%= restaurant.capacity %></li>
   </ul>
-  <%= link_to 'Book a reservation', new_reservation_path %> | <%= link_to 'Restaurant page', restaurant_path(restaurant.id) %>
+  <%= link_to 'Book a reservation in this restaurant', new_restaurant_reservation_path(restaurant) %> | <%= link_to 'Restaurant page', restaurant_path(restaurant.id) %>
   <br>
 <% end %>

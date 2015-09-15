@@ -1,4 +1,36 @@
 <h1>Restaurant <%= @restaurant.id %>: <%= @restaurant.name %></h1>
 <p><%= @restaurant.name %></p>
 <p><%= @restaurant.capacity %></p>
-<%= link_to 'Book a reservation in this restaurant', new_reservation_path %> | <%= link_to 'Modify a reservation in this restaurant', edit_reservation_path %> | <%= link_to 'Back to restaurants', restaurants_path %>
+
+<% if current_user %>
+  <h2>Book a reservation</h2>
+  <%= form_for([@restaurant, @reservation]) do |f| %>
+    <% if @reservation.errors.any? %>
+      <div class="error_explanation">
+        <h2><%= pluralize(@reservation.errors.count, "error")%> prohibited the reservation from being saved: </h2>
+        <ul>
+          <% @reservation.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :dinner_time %>
+      <%= f.datetime_select :dinner_time %>
+    </div>
+    <div class="field">
+      <%= f.label :party_size %>
+      <%= f.number_field :party_size %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+
+   <%= link_to 'Modify a reservation in this restaurant', edit_restaurant_reservation_path %> | <%= link_to 'Back to restaurants', restaurants_path %>
+
+ <% else %>
+  <p>Please <%= link_to "log in", new_session_path %> to book a reservation.</p> 
+ <% end %>

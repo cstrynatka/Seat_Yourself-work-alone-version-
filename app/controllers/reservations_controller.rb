@@ -1,6 +1,12 @@
 class ReservationsController < ApplicationController
+  before_filter :ensure_logged_in
+  before_action :load_restaurant
+
   def index
-    @reservations = Reservation.all
+    # fing_by only returns the first record matched
+    # use where to find all 
+    @reservations = current_user.reservations 
+    # @reservations = Reservation.where(user_id: current_user.id)
   end
 
   def new
@@ -8,9 +14,12 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = Reservation.new(reservation_params)
+    # @reservation = Reservation.new(reservation_params)
+    # @reservation.restaurant_id = @restaurant.id
+    @reservation = @restaurant.reservations.build(reservation_params)
+    @reservation.user_id = current_user.id
     if @reservation.save
-      redirect_to reservations_path
+      redirect_to restaurant_reservations_path
     else
       render :new
     end
@@ -27,7 +36,7 @@ class ReservationsController < ApplicationController
   def update
     @reservation = Reservation.find(params[:id])
     if @reservation.update_attributes(reservation_params)
-      redirect_to reservation_path
+      redirect_to restaurant_reservation_path
     else
       render :edit
     end
@@ -36,11 +45,15 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation = Reservation.find(params[:id])
     @reservation.destroy
-    redirect_to reservation_path
+    redirect_to restaurant_reservation_path
   end
 
   private
   def reservation_params
-    params.require(:reservation).permit(:party_size, :dinner_time)
+    params.require(:reservation).permit(:party_size, :dinner_time, :restaurant_id)
+  end
+
+  def load_restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id])
   end
 end

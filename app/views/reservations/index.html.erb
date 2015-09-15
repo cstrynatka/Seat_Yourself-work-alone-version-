@@ -5,4 +5,6 @@
     <li>Date & Time: <%= reservation.dinner_time %></li>
     <li>Party size: <%= reservation.party_size %></li>
   </ul>
+  <p><%= link_to 'Edit reservation', edit_restaurant_reservation_path(reservation.restaurant, reservation) %></p>
 <% end %>
+<%= link_to 'Back to restaurants', restaurants_path %>
