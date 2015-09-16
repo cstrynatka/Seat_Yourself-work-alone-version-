@@ -16,7 +16,7 @@
   </div>
   <div class="field">
     <%= f.label :capacity %>
-    <%= f.number_field :capacity %>
+    <%= f.number_field :capacity, max: 100 %>
   </div>
   <div class="actions">
     <%= f.submit %>

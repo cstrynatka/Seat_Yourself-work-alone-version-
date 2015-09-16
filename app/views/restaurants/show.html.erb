@@ -18,18 +18,28 @@
 
     <div class="field">
       <%= f.label :dinner_time %>
-      <%= f.datetime_select :dinner_time %>
+      <%= f.datetime_select :dinner_time, minute_step: 30, ampm: true, start_hour: 11, end_hour: 20 %>
     </div>
     <div class="field">
       <%= f.label :party_size %>
-      <%= f.number_field :party_size %>
+      <%= f.number_field :party_size, min: 2, max: 20 %>
     </div>
     <div class="actions">
       <%= f.submit %>
     </div>
   <% end %>
 
-   <%= link_to 'Modify a reservation in this restaurant', edit_restaurant_reservation_path %> | <%= link_to 'Back to restaurants', restaurants_path %>
+<h2>Reservations you have booked: </h2>
+<% @restaurant.reservations.each do |reservation| %>
+  <ul>
+    <li>Date & Time: <%= reservation.dinner_time %></li>
+    <li>Party size: <%= reservation.party_size %></li>
+  </ul>
+  <p><%= link_to 'Modify reservation', edit_restaurant_reservation_path(reservation.restaurant, reservation) %></p>
+   <p><%= link_to 'Delete reservation', restaurant_reservation_path(reservation.restaurant, reservation), method: :delete, message: {confirm: "Are you sure you want to delete your reservation?"} %></p>
+<% end %>
+
+<%= link_to 'Back to restaurants', restaurants_path %>
 
  <% else %>
   <p>Please <%= link_to "log in", new_session_path %> to book a reservation.</p> 

@@ -11,12 +11,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :dinner_time %>
-    <%= f.datetime_select :dinner_time %>
-  </div>
-  <div class="field">
-    <%= f.label :party_size %>
-    <%= f.number_field :party_size %>
+      <%= f.label :dinner_time %>
+      <%= f.datetime_select :dinner_time, minute_step: 30, ampm: true, start_hour: 11, end_hour: 20 %>
+    </div>
+    <div class="field">
+      <%= f.label :party_size %>
+      <%= f.number_field :party_size, min: 2, max: 20 %>
   </div>
   <div class="actions">
     <%= f.submit %>

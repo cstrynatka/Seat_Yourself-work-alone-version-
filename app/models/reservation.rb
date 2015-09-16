@@ -2,7 +2,7 @@ class Reservation < ActiveRecord::Base
   belongs_to :user
   belongs_to :restaurant
 
-  validates :party_size, presence: true
+  validates :dinner_time, :party_size, presence: true
   validate :capacity_exists # customed validation
 
   def capacity_exists # 还有没有空位
